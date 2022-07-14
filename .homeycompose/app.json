@@ -1,0 +1,28 @@
+{
+  "id": "br.com.rhuan.smartthings",
+  "version": "1.0.0",
+  "compatibility": ">=5.0.0",
+  "sdk": 3,
+  "name": {
+    "en": "SmartThings Hub"
+  },
+  "description": {
+    "en": "Add support for Samsung SmartThings Hub"
+  },
+  "category": [
+    "tools"
+  ],
+  "permissions": [],
+  "images": {
+    "small": "/assets/images/small.png",
+    "large": "/assets/images/large.png",
+    "xlarge": "/assets/images/xlarge.png"
+  },
+  "author": {
+    "name": "Rhuan Barreto",
+    "email": "rhuan.barreto@gmail.com"
+  },
+  "platforms": [
+    "local"
+  ]
+}

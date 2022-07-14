@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <!-- The '/homey.js' script must be included in your settings view to work -->
+    <script
+      type="text/javascript"
+      src="/homey.js"
+      data-origin="settings"
+    ></script>
+  </head>
+  <body>
+    <h1 data-i18n="settings.title" />
+
+    <fieldset>
+      <legend data-i18n="settings.title" />
+
+      <div class="field row">
+        <label for="token">Personal Access Token</label>
+        <input id="token" type="password" value="" />
+      </div>
+    </fieldset>
+
+    <button id="save" class="right">Save changes</button>
+
+    <script type="text/javascript">
+      // a method named 'onHomeyReady' must be present in your code
+      function onHomeyReady(Homey) {
+        // Tell Homey we're ready to be displayed
+        Homey.ready();
+
+        var tokenElement = document.getElementById("token");
+        var saveElement = document.getElementById("save");
+
+        Homey.get("personalAccessToken", function (err, token) {
+          if (err) return Homey.alert(err);
+          tokenElement.value = token;
+        });
+
+        saveElement.addEventListener("click", function (e) {
+          Homey.set("personalAccessToken", tokenElement.value, function (err) {
+            if (err) return Homey.alert(err);
+          });
+        });
+      }
+    </script>
+  </body>
+</html>
