@@ -4,6 +4,7 @@ import {
 } from "@smartthings/core-sdk";
 import Homey from "homey";
 import PairSession from "homey/lib/PairSession";
+import { getHomeyCapabilitiesForDevice } from "../../classes/SmartThings";
 
 class MyDriver extends Homey.Driver {
   async onInit() {
@@ -17,7 +18,6 @@ class MyDriver extends Homey.Driver {
       token = data.password;
       const client = new SmartThingsClient(new BearerTokenAuthenticator(token));
       const credentialsAreValid = await client.locations.list();
-      this.log(credentialsAreValid);
       return Boolean(credentialsAreValid);
     });
 
@@ -28,14 +28,15 @@ class MyDriver extends Homey.Driver {
       });
 
       const devices = myDevices.map((device) => {
+        const capabilities = getHomeyCapabilitiesForDevice(device);
         return {
           name: device.label ?? device.name,
           data: {
             id: device.deviceId,
+            components: device.components,
           },
-          settings: {
-            password: token,
-          },
+          settings: { password: token },
+          capabilities,
         };
       });
 

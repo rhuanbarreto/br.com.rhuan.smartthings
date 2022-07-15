@@ -8,7 +8,7 @@
     "en": "SmartThings Hub"
   },
   "description": {
-    "en": "Add support for Samsung SmartThings Hub"
+    "en": "Use the devices from your SmartThings Hub"
   },
   "category": [
     "tools"
@@ -24,31 +24,58 @@
     "email": "rhuan.barreto@gmail.com"
   },
   "platforms": [
-    "local"
+    "local",
+    "cloud"
   ],
+  "brandColor": "#12279e",
   "drivers": [
     {
       "name": {
-        "en": "Lock"
+        "en": "Smoke Detector"
       },
-      "class": "lock",
+      "class": "homealarm",
       "capabilities": [
-        "locked",
-        "alarm_battery",
-        "measure_battery"
+        "alarm_smoke"
       ],
       "platforms": [
-        "local"
+        "local",
+        "cloud"
       ],
-      "images": {
-        "small": "/drivers/lock/assets/images/icon.svg",
-        "large": "/drivers/lock/assets/images/icon.svg",
-        "xlarge": "/drivers/lock/assets/images/icon.svg"
-      },
       "connectivity": [
         "cloud"
       ],
-      "id": "lock"
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Don't fill this field"
+            },
+            "usernamePlaceholder": {
+              "en": "Don't fill this field"
+            },
+            "passwordLabel": {
+              "en": "Personal Access Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Personal Access Token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "id": "smoke-detector"
     }
   ]
 }

@@ -7,7 +7,7 @@
     "en": "SmartThings Hub"
   },
   "description": {
-    "en": "Add support for Samsung SmartThings Hub"
+    "en": "Use the devices from your SmartThings Hub"
   },
   "category": [
     "tools"
@@ -23,6 +23,8 @@
     "email": "rhuan.barreto@gmail.com"
   },
   "platforms": [
-    "local"
-  ]
+    "local",
+    "cloud"
+  ],
+  "brandColor": "#12279e"
 }
