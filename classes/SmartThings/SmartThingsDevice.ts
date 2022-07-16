@@ -4,23 +4,47 @@ import {
 } from "@smartthings/core-sdk";
 import Homey from "homey";
 import STLogger from "./Logger";
-import { getSmartThingsCapability, getValueConverter } from "./utils";
+import {
+  getSmartThingsCapability,
+  getSmartThingsCommand,
+  getValueConverter,
+} from "./utils";
 
 class SmartThingsDevice extends Homey.Device {
   timer: NodeJS.Timeout | undefined;
-  /**
-   * onInit is called when the device is initialized.
-   */
+  client!: SmartThingsClient;
+
   async onInit() {
-    const { id } = this.getData(); // Get Device Id
-    const capabilities = this.getCapabilities(); // Get Device Capabilities
-    const client = new SmartThingsClient(
+    this.client = new SmartThingsClient(
       new BearerTokenAuthenticator(this.getSetting("password")),
       { logger: new STLogger() }
     );
+    this.initializeListeners();
+    this.initializeCapabilityPolling();
+  }
 
+  initializeListeners() {
+    const { id } = this.getData();
+    const capabilities = this.getCapabilities();
+    capabilities.forEach((homeyCapability) => {
+      const stCommand = getSmartThingsCommand(homeyCapability);
+      const stCapability = getSmartThingsCapability(homeyCapability);
+      if (!stCommand || !stCapability) return;
+      this.registerCapabilityListener(homeyCapability, async (value) => {
+        await this.client.devices.executeCommand(id, {
+          capability: stCapability,
+          command: stCommand(value),
+        });
+        this.setCapabilityValue(homeyCapability, value);
+      });
+    });
+  }
+
+  initializeCapabilityPolling() {
+    const { id } = this.getData();
+    const capabilities = this.getCapabilities();
     this.timer = this.homey.setInterval(async () => {
-      const result = await client.devices.getStatus(id);
+      const result = await this.client.devices.getStatus(id);
       capabilities.forEach((homeyCapability) => {
         const stCapability = getSmartThingsCapability(homeyCapability);
         const converter = getValueConverter(homeyCapability);
@@ -35,15 +59,8 @@ class SmartThingsDevice extends Homey.Device {
           converter(result.components.main[stCapability])
         ).catch(this.error);
       });
-    }, 10000);
+    }, 8000);
     this.timer.refresh();
-  }
-
-  /**
-   * onAdded is called when the user adds the device, called just after pairing.
-   */
-  async onAdded() {
-    this.log("MyDevice has been added");
   }
 
   /**
@@ -62,25 +79,17 @@ class SmartThingsDevice extends Homey.Device {
     this.log("MyDevice settings where changed");
   }
 
-  /**
-   * onRenamed is called when the user updates the device's name.
-   * This method can be used this to synchronise the name to the device.
-   * @param {string} name The new name
-   */
   async onRenamed(name: string) {
     this.log("MyDevice was renamed");
+    const { id } = this.getData();
+    this.client.devices.update(id, { label: name });
   }
 
-  /**
-   * onDeleted is called when the user deleted the device.
-   */
   async onDeleted() {
-    this.log("MyDevice has been deleted");
     this.homey.clearInterval(this.timer);
   }
 
   async onUninit() {
-    this.log("MyDevice has been uninitialized");
     this.homey.clearInterval(this.timer);
   }
 }

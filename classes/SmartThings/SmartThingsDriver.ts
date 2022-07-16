@@ -10,11 +10,6 @@ import { getHomeyCapabilitiesForDevice } from "./utils";
 class SmartThingsDriver extends Homey.Driver {
   capability: string = "";
 
-  async onInit() {
-    this.log("MyDriver has been initialized");
-    this.log("This is the capability: ", this.capability);
-  }
-
   async onPair(session: PairSession) {
     let token = "";
 

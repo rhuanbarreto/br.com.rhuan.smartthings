@@ -7,7 +7,7 @@ export function getHomeyCapability(smartThingsCapability: string) {
 }
 
 export function getSmartThingsCapability(homeyCapability: string | null) {
-  if (homeyCapability === null) return null;
+  if (!homeyCapability) return null;
   return (
     Object.keys(capabilities).find(
       (key) => capabilities[key].homeyCapability === homeyCapability
@@ -15,10 +15,17 @@ export function getSmartThingsCapability(homeyCapability: string | null) {
   );
 }
 
+export function getSmartThingsCommand(homeyCapability: string | null) {
+  if (!homeyCapability) return null;
+  const stCapability = getSmartThingsCapability(homeyCapability);
+  if (!stCapability) return null;
+  return capabilities[stCapability].command;
+}
+
 export function getValueConverter(homeyCapability: string | null) {
-  if (homeyCapability === null) return null;
+  if (!homeyCapability) return null;
   const key = getSmartThingsCapability(homeyCapability);
-  if (key === null) return null;
+  if (!key) return null;
   return capabilities[key].converter;
 }
 
