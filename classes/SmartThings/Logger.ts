@@ -21,10 +21,10 @@ class STLogger implements Logger {
     console.error(message, ...args);
   }
   isTraceEnabled() {
-    return true;
+    return false;
   }
   isDebugEnabled() {
-    return true;
+    return false;
   }
   isInfoEnabled() {
     return true;
