@@ -2,7 +2,7 @@ import {
   BearerTokenAuthenticator,
   SmartThingsClient,
 } from "@smartthings/core-sdk";
-import Homey from "homey";
+import Homey, { Device } from "homey";
 import PairSession from "homey/lib/PairSession";
 import STLogger from "./Logger";
 import { getHomeyCapabilitiesForDevice } from "./utils";
@@ -43,6 +43,19 @@ class SmartThingsDriver extends Homey.Driver {
       });
 
       return devices;
+    });
+  }
+
+  onRepair(session: PairSession, device: Device) {
+    session.setHandler("login", async (data: { password: string }) => {
+      const token = data.password;
+      const client = new SmartThingsClient(
+        new BearerTokenAuthenticator(token),
+        { logger: new STLogger() }
+      );
+      const credentialsAreValid = await client.locations.list();
+      device.setSettings({ password: token });
+      return Boolean(credentialsAreValid);
     });
   }
 }

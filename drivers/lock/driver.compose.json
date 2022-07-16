@@ -44,5 +44,25 @@
       "id": "add_devices",
       "template": "add_devices"
     }
+  ],
+  "repair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Don't fill this field"
+        },
+        "usernamePlaceholder": {
+          "en": "Don't fill this field"
+        },
+        "passwordLabel": {
+          "en": "Personal Access Token"
+        },
+        "passwordPlaceholder": {
+          "en": "Personal Access Token"
+        }
+      }
+    }
   ]
 }
