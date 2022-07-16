@@ -58,7 +58,7 @@ class SmartThingsDevice extends Homey.Device {
           converter(result.components.main[stCapability])
         ).catch(this.error);
       });
-    }, 8000);
+    }, 6000); // 5000 is the minimum SmartThings accepts without hitting limits
     this.timer.refresh();
   }
 
