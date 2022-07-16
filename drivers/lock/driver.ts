@@ -1,7 +1,7 @@
 import SmartThingsDriver from "../../classes/SmartThings/SmartThingsDriver";
 
-class LockDriver extends SmartThingsDriver {
+class Driver extends SmartThingsDriver {
   capability = "lock";
 }
 
-module.exports = LockDriver;
+module.exports = Driver;
