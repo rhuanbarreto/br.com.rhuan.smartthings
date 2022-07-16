@@ -7,6 +7,7 @@ const capabilities: Record<
     converter?: (
       value: CapabilityStatus
     ) => number | boolean | string | null | undefined;
+    command?: (value: number | boolean | string) => string;
   }
 > = {
   battery: {
@@ -27,19 +28,20 @@ const capabilities: Record<
   },
   temperatureAlarm: {
     homeyCapability: "alarm_heat",
-    converter: (v) => v.temperatureAlarm.value !== null,
+    converter: (v) =>
+      v.temperatureAlarm.value !== null &&
+      v.temperatureAlarm.value !== "cleared",
   },
   lock: {
     homeyCapability: "locked",
     converter: (v) => v.lock.value === "locked",
+    command: (v) => (v ? "lock" : "unlock"),
   },
-  configuration: { homeyCapability: null },
+  configuration: { homeyCapability: null, command: () => "configure" },
   sensor: { homeyCapability: null },
-  refresh: { homeyCapability: null },
-  healthCheck: { homeyCapability: null },
+  refresh: { homeyCapability: null, command: () => "refresh" },
+  healthCheck: { homeyCapability: null, command: () => "ping" },
   actuator: { homeyCapability: null },
 };
-
-export type SupportedSTCapabilities = keyof typeof capabilities;
 
 export default capabilities;
