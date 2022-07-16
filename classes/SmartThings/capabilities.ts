@@ -37,10 +37,20 @@ const capabilities: Record<
     converter: (v) => v.lock.value === "locked",
     command: (v) => (v ? "lock" : "unlock"),
   },
+  switch: {
+    homeyCapability: "onoff",
+    converter: (v) => v.switch.value === "on",
+    command: (v) => (v ? "on" : "off"),
+  },
+  powerMeter: {
+    homeyCapability: "measure_power",
+    converter: (v) => v.power.value as number,
+  },
   configuration: { homeyCapability: null, command: () => "configure" },
-  sensor: { homeyCapability: null },
   refresh: { homeyCapability: null, command: () => "refresh" },
   healthCheck: { homeyCapability: null, command: () => "ping" },
+  sensor: { homeyCapability: null },
+  outlet: { homeyCapability: null },
   actuator: { homeyCapability: null },
 };
 
