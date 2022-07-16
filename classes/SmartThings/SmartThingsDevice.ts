@@ -35,7 +35,6 @@ class SmartThingsDevice extends Homey.Device {
           capability: stCapability,
           command: stCommand(value),
         });
-        this.setCapabilityValue(homeyCapability, value);
       });
     });
   }
@@ -80,7 +79,7 @@ class SmartThingsDevice extends Homey.Device {
   }
 
   async onRenamed(name: string) {
-    this.log("MyDevice was renamed");
+    if (name === this.getName()) return;
     const { id } = this.getData();
     this.client.devices.update(id, { label: name });
   }
