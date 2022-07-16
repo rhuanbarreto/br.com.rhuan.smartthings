@@ -77,6 +77,10 @@ const capabilities: Record<
     converter: (v) => v.mute.value === "muted",
     command: (v) => (v ? "mute" : "unmute"),
   },
+  presenceSensor: {
+    homeyCapability: "alarm_motion",
+    converter: (v) => v.presence.value === "present",
+  },
   configuration: { homeyCapability: null, command: () => "configure" },
   refresh: { homeyCapability: null, command: () => "refresh" },
   healthCheck: { homeyCapability: null, command: () => "ping" },

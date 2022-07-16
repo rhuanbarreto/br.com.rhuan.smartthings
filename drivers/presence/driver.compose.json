@@ -1,0 +1,71 @@
+{
+  "name": {
+    "en": "Presence"
+  },
+  "class": "homealarm",
+  "capabilities": [
+    "alarm_motion"
+  ],
+  "capabilitiesOptions": {
+    "alarm_motion": {
+      "zoneActivity": true
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Don't fill this field"
+        },
+        "usernamePlaceholder": {
+          "en": "Don't fill this field"
+        },
+        "passwordLabel": {
+          "en": "Personal Access Token"
+        },
+        "passwordPlaceholder": {
+          "en": "Personal Access Token"
+        }
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "repair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Don't fill this field"
+        },
+        "usernamePlaceholder": {
+          "en": "Don't fill this field"
+        },
+        "passwordLabel": {
+          "en": "Personal Access Token"
+        },
+        "passwordPlaceholder": {
+          "en": "Personal Access Token"
+        }
+      }
+    }
+  ]
+}
