@@ -1,0 +1,77 @@
+{
+  "name": {
+    "en": "TV"
+  },
+  "class": "tv",
+  "capabilities": [
+    "speaker_playing",
+    "volume_set",
+    "volume_mute",
+    "media_input_source"
+  ],
+  "capabilitiesOptions": {
+    "volume_set": {
+      "decimals": 0,
+      "min": 0,
+      "max": 100,
+      "units": "%"
+    }
+  },
+  "platforms": [
+    "local"
+  ],
+  "connectivity": [
+    "cloud"
+  ],
+  "pair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Don't fill this field"
+        },
+        "usernamePlaceholder": {
+          "en": "Don't fill this field"
+        },
+        "passwordLabel": {
+          "en": "Personal Access Token"
+        },
+        "passwordPlaceholder": {
+          "en": "Personal Access Token"
+        }
+      }
+    },
+    {
+      "id": "list_devices",
+      "template": "list_devices",
+      "navigation": {
+        "next": "add_devices"
+      }
+    },
+    {
+      "id": "add_devices",
+      "template": "add_devices"
+    }
+  ],
+  "repair": [
+    {
+      "id": "login_credentials",
+      "template": "login_credentials",
+      "options": {
+        "usernameLabel": {
+          "en": "Don't fill this field"
+        },
+        "usernamePlaceholder": {
+          "en": "Don't fill this field"
+        },
+        "passwordLabel": {
+          "en": "Personal Access Token"
+        },
+        "passwordPlaceholder": {
+          "en": "Personal Access Token"
+        }
+      }
+    }
+  ]
+}

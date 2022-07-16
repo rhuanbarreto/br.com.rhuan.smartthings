@@ -1,0 +1,12 @@
+[
+  {
+    "id": "password",
+    "type": "password",
+    "label": {
+      "en": "Personal Access Token"
+    },
+    "hint": {
+      "en": "The personal access token generated in the SmartThings token portal."
+    }
+  }
+]
