@@ -76,7 +76,39 @@
           "template": "add_devices"
         }
       ],
-      "id": "lock"
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Don't fill this field"
+            },
+            "usernamePlaceholder": {
+              "en": "Don't fill this field"
+            },
+            "passwordLabel": {
+              "en": "Personal Access Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Personal Access Token"
+            }
+          }
+        }
+      ],
+      "id": "lock",
+      "settings": [
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Personal Access Token"
+          },
+          "hint": {
+            "en": "The personal access token generated in the SmartThings token portal."
+          }
+        }
+      ]
     },
     {
       "name": {
@@ -124,7 +156,39 @@
           "template": "add_devices"
         }
       ],
-      "id": "smoke-detector"
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Don't fill this field"
+            },
+            "usernamePlaceholder": {
+              "en": "Don't fill this field"
+            },
+            "passwordLabel": {
+              "en": "Personal Access Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Personal Access Token"
+            }
+          }
+        }
+      ],
+      "id": "smoke-detector",
+      "settings": [
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Personal Access Token"
+          },
+          "hint": {
+            "en": "The personal access token generated in the SmartThings token portal."
+          }
+        }
+      ]
     }
   ]
 }
