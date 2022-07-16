@@ -1,0 +1,119 @@
+{
+  "type": "enum",
+  "values": [
+    {
+      "id": "AM",
+      "title": {
+        "en": "AM"
+      }
+    },
+    {
+      "id": "CD",
+      "title": {
+        "en": "CD"
+      }
+    },
+    {
+      "id": "FM",
+      "title": {
+        "en": "FM"
+      }
+    },
+    {
+      "id": "HDMI",
+      "title": {
+        "en": "HDMI"
+      }
+    },
+    {
+      "id": "HDMI1",
+      "title": {
+        "en": "HDMI 1"
+      }
+    },
+    {
+      "id": "HDMI2",
+      "title": {
+        "en": "HDMI 2"
+      }
+    },
+    {
+      "id": "HDMI3",
+      "title": {
+        "en": "HDMI 3"
+      }
+    },
+    {
+      "id": "HDMI4",
+      "title": {
+        "en": "HDMI 4"
+      }
+    },
+    {
+      "id": "HDMI5",
+      "title": {
+        "en": "HDMI 5"
+      }
+    },
+    {
+      "id": "HDMI6",
+      "title": {
+        "en": "HDMI 6"
+      }
+    },
+    {
+      "id": "digitalTv",
+      "title": {
+        "en": "Digital TV"
+      }
+    },
+    {
+      "id": "USB",
+      "title": {
+        "en": "USB"
+      }
+    },
+    {
+      "id": "YouTube",
+      "title": {
+        "en": "YouTube"
+      }
+    },
+    {
+      "id": "aux",
+      "title": {
+        "en": "AUX"
+      }
+    },
+    {
+      "id": "bluetooth",
+      "title": {
+        "en": "Bluetooth"
+      }
+    },
+    {
+      "id": "digital",
+      "title": {
+        "en": "Digital Audio"
+      }
+    },
+    {
+      "id": "melon",
+      "title": {
+        "en": "Melon"
+      }
+    },
+    {
+      "id": "wifi",
+      "title": {
+        "en": "Wi-Fi"
+      }
+    }
+  ],
+  "title": {
+    "en": "Current Source"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "sensor"
+}

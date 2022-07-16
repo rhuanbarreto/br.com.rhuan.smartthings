@@ -31,9 +31,16 @@ class SmartThingsDevice extends Homey.Device {
       const stCapability = getSmartThingsCapability(homeyCapability);
       if (!stCommand || !stCapability) return;
       this.registerCapabilityListener(homeyCapability, async (value) => {
+        const commandResult = stCommand(value);
+        const finalResult =
+          typeof commandResult === "string" ||
+          typeof commandResult === "number" ||
+          typeof commandResult === "boolean"
+            ? { command: commandResult }
+            : commandResult;
         await this.client.devices.executeCommand(id, {
           capability: stCapability,
-          command: stCommand(value),
+          ...finalResult,
         });
       });
     });

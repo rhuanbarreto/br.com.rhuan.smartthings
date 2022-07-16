@@ -7,7 +7,9 @@ const capabilities: Record<
     converter?: (
       value: CapabilityStatus
     ) => number | boolean | string | null | undefined;
-    command?: (value: number | boolean | string) => string;
+    command?: (
+      value: number | string | object
+    ) => string | { command: string; arguments: (string | number | object)[] };
   }
 > = {
   battery: {
@@ -49,11 +51,31 @@ const capabilities: Record<
   washerOperatingState: {
     homeyCapability: "washer_operating_state",
     converter: (v) => v.machineState.value as string,
-    command: (v) => `setMachineState(${v})`,
+    command: (v) => ({ command: "setMachineState", arguments: [v] }),
   },
   powerConsumptionReport: {
     homeyCapability: "measure_power",
     converter: (v) => (v.powerConsumption.value as { power: number }).power,
+  },
+  audioVolume: {
+    homeyCapability: "volume_set",
+    converter: (v) => v.volume.value as number,
+    command: (v) => ({ command: "setVolume", arguments: [v] }),
+  },
+  mediaPlayback: {
+    homeyCapability: "speaker_playing",
+    converter: (v) => v.playbackStatus.value === "playing",
+    command: (v) => (v ? "play" : "pause"),
+  },
+  mediaInputSource: {
+    homeyCapability: "media_input_source",
+    converter: (v) => v.inputSource.value as string,
+    command: (v) => ({ command: "setInputSource", arguments: [v] }),
+  },
+  audioMute: {
+    homeyCapability: "volume_mute",
+    converter: (v) => v.mute.value === "muted",
+    command: (v) => (v ? "mute" : "unmute"),
   },
   configuration: { homeyCapability: null, command: () => "configure" },
   refresh: { homeyCapability: null, command: () => "refresh" },
