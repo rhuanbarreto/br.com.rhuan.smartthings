@@ -4,10 +4,10 @@
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
-    "en": "SmartThings Hub"
+    "en": "SmartThings"
   },
   "description": {
-    "en": "Use the devices from your SmartThings Hub"
+    "en": "Use the devices from your SmartThings App in Homey"
   },
   "category": [
     "tools"
@@ -23,8 +23,7 @@
     "email": "rhuan.barreto@gmail.com"
   },
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "brandColor": "#12279e"
 }

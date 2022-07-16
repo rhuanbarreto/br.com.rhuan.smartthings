@@ -8,8 +8,7 @@
     "locked"
   ],
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "connectivity": [
     "cloud"
@@ -64,5 +63,10 @@
         }
       }
     }
-  ]
+  ],
+  "energy": {
+    "batteries": [
+      "OTHER"
+    ]
+  }
 }
