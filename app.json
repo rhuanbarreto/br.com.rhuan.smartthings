@@ -5,10 +5,10 @@
   "compatibility": ">=5.0.0",
   "sdk": 3,
   "name": {
-    "en": "SmartThings Hub"
+    "en": "SmartThings"
   },
   "description": {
-    "en": "Use the devices from your SmartThings Hub"
+    "en": "Use the devices from your SmartThings App in Homey"
   },
   "category": [
     "tools"
@@ -24,8 +24,7 @@
     "email": "rhuan.barreto@gmail.com"
   },
   "platforms": [
-    "local",
-    "cloud"
+    "local"
   ],
   "brandColor": "#12279e",
   "drivers": [
@@ -39,8 +38,7 @@
         "locked"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "connectivity": [
         "cloud"
@@ -96,6 +94,11 @@
           }
         }
       ],
+      "energy": {
+        "batteries": [
+          "OTHER"
+        ]
+      },
       "id": "lock",
       "settings": [
         {
@@ -119,8 +122,7 @@
         "alarm_smoke"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "connectivity": [
         "cloud"
@@ -200,8 +202,7 @@
         "onoff"
       ],
       "platforms": [
-        "local",
-        "cloud"
+        "local"
       ],
       "connectivity": [
         "cloud"
@@ -270,6 +271,116 @@
           }
         }
       ]
+    },
+    {
+      "name": {
+        "en": "Washing Machine"
+      },
+      "class": "other",
+      "capabilities": [
+        "washer_operating_state"
+      ],
+      "platforms": [
+        "local"
+      ],
+      "connectivity": [
+        "cloud"
+      ],
+      "pair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Don't fill this field"
+            },
+            "usernamePlaceholder": {
+              "en": "Don't fill this field"
+            },
+            "passwordLabel": {
+              "en": "Personal Access Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Personal Access Token"
+            }
+          }
+        },
+        {
+          "id": "list_devices",
+          "template": "list_devices",
+          "navigation": {
+            "next": "add_devices"
+          }
+        },
+        {
+          "id": "add_devices",
+          "template": "add_devices"
+        }
+      ],
+      "repair": [
+        {
+          "id": "login_credentials",
+          "template": "login_credentials",
+          "options": {
+            "usernameLabel": {
+              "en": "Don't fill this field"
+            },
+            "usernamePlaceholder": {
+              "en": "Don't fill this field"
+            },
+            "passwordLabel": {
+              "en": "Personal Access Token"
+            },
+            "passwordPlaceholder": {
+              "en": "Personal Access Token"
+            }
+          }
+        }
+      ],
+      "id": "washing-machine",
+      "settings": [
+        {
+          "id": "password",
+          "type": "password",
+          "label": {
+            "en": "Personal Access Token"
+          },
+          "hint": {
+            "en": "The personal access token generated in the SmartThings token portal."
+          }
+        }
+      ]
     }
-  ]
+  ],
+  "capabilities": {
+    "washer_operating_state": {
+      "type": "enum",
+      "values": [
+        {
+          "id": "pause",
+          "title": {
+            "en": "Paused"
+          }
+        },
+        {
+          "id": "run",
+          "title": {
+            "en": "Running"
+          }
+        },
+        {
+          "id": "stop",
+          "title": {
+            "en": "Stopped"
+          }
+        }
+      ],
+      "title": {
+        "en": "Washer State"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "picker"
+    }
+  }
 }
