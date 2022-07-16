@@ -46,12 +46,21 @@ const capabilities: Record<
     homeyCapability: "measure_power",
     converter: (v) => v.power.value as number,
   },
+  washerOperatingState: {
+    homeyCapability: "washer_operating_state",
+    converter: (v) => v.machineState.value as string,
+    command: (v) => `setMachineState(${v})`,
+  },
+  powerConsumptionReport: {
+    homeyCapability: "measure_power",
+    converter: (v) => (v.powerConsumption.value as { power: number }).power,
+  },
   configuration: { homeyCapability: null, command: () => "configure" },
   refresh: { homeyCapability: null, command: () => "refresh" },
   healthCheck: { homeyCapability: null, command: () => "ping" },
-  sensor: { homeyCapability: null },
-  outlet: { homeyCapability: null },
-  actuator: { homeyCapability: null },
+  sensor: { homeyCapability: null }, // Deprecated
+  outlet: { homeyCapability: null }, // Deprecated in favor of switch
+  actuator: { homeyCapability: null }, // Deprecated
 };
 
 export default capabilities;

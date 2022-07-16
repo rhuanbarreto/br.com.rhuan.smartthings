@@ -1,0 +1,29 @@
+{
+  "type": "enum",
+  "values": [
+    {
+      "id": "pause",
+      "title": {
+        "en": "Paused"
+      }
+    },
+    {
+      "id": "run",
+      "title": {
+        "en": "Running"
+      }
+    },
+    {
+      "id": "stop",
+      "title": {
+        "en": "Stopped"
+      }
+    }
+  ],
+  "title": {
+    "en": "Washer State"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "picker"
+}
