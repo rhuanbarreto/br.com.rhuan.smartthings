@@ -50,8 +50,14 @@ class SmartThingsDriver extends Homey.Driver {
       const stDevice = await this.client().devices.get(device.getData().id);
 
       // Update device capabilities
-      device.getCapabilities().map(device.removeCapability);
-      getHomeyCapabilitiesForDevice(stDevice)?.map(device.addCapability);
+      await Promise.all(
+        device.getCapabilities().map((cap) => device.removeCapability(cap))
+      );
+      await Promise.all(
+        getHomeyCapabilitiesForDevice(stDevice)?.map((cap) =>
+          device.addCapability(cap)
+        ) ?? []
+      );
 
       return true;
     });
