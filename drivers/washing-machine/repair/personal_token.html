@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <style type="text/css">
+      .hy-tmpl-login_credentials {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .hy-tmpl-login_credentials-form {
+        position: relative;
+        width: 100%;
+      }
+      .hy-tmpl-login_credentials-row {
+        margin-bottom: 1em;
+      }
+    </style>
+    <form id="pat-form" class="hy-tmpl-login_credentials-form">
+      <div class="hy-tmpl-login_credentials-row row">
+        <label
+          for="token"
+          class="hy-label hy-tmpl-login_credentials-label"
+          data-i18n="personal_token.title"
+        >
+        </label>
+        <input
+          id="token"
+          class="hy-input-text"
+          name="token"
+          type="password"
+          value=""
+          required
+        />
+      </div>
+      <div class="hy-tmpl-login_credentials-row row">
+        <input
+          class="
+            hy-button hy-button-primary hy-button-fill
+            hy-tmpl-login_credentials-submit
+            button
+          "
+          type="submit"
+          value="Submit"
+        />
+      </div>
+    </form>
+
+    <script type="text/javascript">
+      const form = document.getElementById("pat-form");
+      Homey.setTitle(Homey.__("personal_token.title"));
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        Homey.showLoadingOverlay(Homey.__("personal_token.loading"));
+        Homey.emit("personal_token", form.token.value)
+          .then((success) =>
+            success
+              ? Homey.nextView()
+              : Homey.error(Homey.__("personal_token.invalid_credentials"))
+          )
+          .catch(Homey.error)
+          .finally(() => Homey.hideLoadingOverlay());
+      });
+    </script>
+  </body>
+</html>
