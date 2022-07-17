@@ -13,7 +13,7 @@ class SmartThingsDriver extends Homey.Driver {
   async onPair(session: PairSession) {
     const pat = this.homey.settings.get("personalAccessToken");
     if (await this.validateSTToken(pat)) {
-      // @ts-ignore
+      // @ts-ignore This is not working
       await session.showView("list_devices");
     }
 
