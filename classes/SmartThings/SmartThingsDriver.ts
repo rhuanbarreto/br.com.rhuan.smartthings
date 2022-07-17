@@ -11,33 +11,27 @@ class SmartThingsDriver extends Homey.Driver {
   capability: string = "";
 
   async onPair(session: PairSession) {
-    let token = "";
+    const pat = this.homey.settings.get("token");
+    if (await this.validateSTToken(pat)) {
+      // @ts-ignore
+      await session.showView("list_devices");
+    }
 
-    session.setHandler("login", async (data: { password: string }) => {
-      token = data.password;
-      const client = new SmartThingsClient(
-        new BearerTokenAuthenticator(token),
-        { logger: new STLogger() }
-      );
-      const credentialsAreValid = await client.locations.list();
-      return Boolean(credentialsAreValid);
+    session.setHandler("personal_token", async (token: string) => {
+      const valid = await this.validateSTToken(token);
+      if (valid) this.homey.settings.set("token", token);
+      return valid;
     });
 
     session.setHandler("list_devices", async () => {
-      const client = new SmartThingsClient(
-        new BearerTokenAuthenticator(token),
-        { logger: new STLogger() }
-      );
-      const myDevices = await client.devices.list({
+      const myDevices = await this.client().devices.list({
         capability: this.capability,
       });
-
-      const devices = myDevices.map((device) => {
+      const devices = myDevices?.map((device) => {
         const capabilities = getHomeyCapabilitiesForDevice(device);
         return {
           name: device.label ?? device.name,
           data: { id: device.deviceId },
-          settings: { password: token },
           capabilities,
         };
       });
@@ -47,16 +41,35 @@ class SmartThingsDriver extends Homey.Driver {
   }
 
   onRepair(session: PairSession, device: Device) {
-    session.setHandler("login", async (data: { password: string }) => {
-      const token = data.password;
-      const client = new SmartThingsClient(
-        new BearerTokenAuthenticator(token),
-        { logger: new STLogger() }
-      );
-      const credentialsAreValid = await client.locations.list();
-      device.setSettings({ password: token });
-      return Boolean(credentialsAreValid);
+    session.setHandler("personal_token", async (token: string) => {
+      // Refresh token
+      const valid = await this.validateSTToken(token);
+      if (!valid) return false;
+      this.homey.settings.set("token", token);
+
+      const stDevice = await this.client().devices.get(device.getData().id);
+
+      // Update device capabilities
+      device.getCapabilities().map(device.removeCapability);
+      getHomeyCapabilitiesForDevice(stDevice)?.map(device.addCapability);
+
+      return true;
     });
+  }
+
+  private client(pat?: string) {
+    const token = pat ?? (this.homey.settings.get("token") as string);
+    if (!token) throw new Error("No personal access token present");
+    return new SmartThingsClient(new BearerTokenAuthenticator(token), {
+      logger: new STLogger(),
+    });
+  }
+
+  async validateSTToken(token: string) {
+    if (!token) return false;
+    const client = this.client(token);
+    const valid = await client.locations.list().catch(() => false);
+    return Boolean(valid);
   }
 }
 

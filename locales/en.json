@@ -1,1 +1,7 @@
-{}
+{
+  "personal_token": {
+    "title": "Personal Access Token",
+    "loading": "loading",
+    "invalid_credentials": "Invalid Credentials"
+  }
+}

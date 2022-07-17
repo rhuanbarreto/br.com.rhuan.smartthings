@@ -12,13 +12,16 @@ import {
 
 class SmartThingsDevice extends Homey.Device {
   timer: NodeJS.Timeout | undefined;
-  client!: SmartThingsClient;
+
+  private get client() {
+    const token = this.homey.settings.get("token") as string;
+    if (!token) throw new Error("No personal access token present");
+    return new SmartThingsClient(new BearerTokenAuthenticator(token), {
+      logger: new STLogger(),
+    });
+  }
 
   async onInit() {
-    this.client = new SmartThingsClient(
-      new BearerTokenAuthenticator(this.getSetting("password")),
-      { logger: new STLogger() }
-    );
     this.initializeListeners();
     this.initializeCapabilityPolling();
   }
@@ -65,7 +68,7 @@ class SmartThingsDevice extends Homey.Device {
           converter(result.components.main[stCapability])
         ).catch(this.error);
       });
-    }, 6000); // 5000 is the minimum SmartThings accepts without hitting limits
+    }, 5000); // 5000 is the minimum SmartThings accepts without hitting limits
     this.timer.refresh();
   }
 
