@@ -11,7 +11,7 @@ class SmartThingsDriver extends Homey.Driver {
   capability: string = "";
 
   async onPair(session: PairSession) {
-    const pat = this.homey.settings.get("token");
+    const pat = this.homey.settings.get("personalAccessToken");
     if (await this.validateSTToken(pat)) {
       // @ts-ignore
       await session.showView("list_devices");
@@ -19,7 +19,7 @@ class SmartThingsDriver extends Homey.Driver {
 
     session.setHandler("personal_token", async (token: string) => {
       const valid = await this.validateSTToken(token);
-      if (valid) this.homey.settings.set("token", token);
+      if (valid) this.homey.settings.set("personalAccessToken", token);
       return valid;
     });
 
@@ -45,7 +45,7 @@ class SmartThingsDriver extends Homey.Driver {
       // Refresh token
       const valid = await this.validateSTToken(token);
       if (!valid) return false;
-      this.homey.settings.set("token", token);
+      this.homey.settings.set("personalAccessToken", token);
 
       const stDevice = await this.client().devices.get(device.getData().id);
 
@@ -58,7 +58,8 @@ class SmartThingsDriver extends Homey.Driver {
   }
 
   private client(pat?: string) {
-    const token = pat ?? (this.homey.settings.get("token") as string);
+    const token =
+      pat ?? (this.homey.settings.get("personalAccessToken") as string);
     if (!token) throw new Error("No personal access token present");
     return new SmartThingsClient(new BearerTokenAuthenticator(token), {
       logger: new STLogger(),

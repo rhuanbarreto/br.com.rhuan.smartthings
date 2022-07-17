@@ -69,19 +69,7 @@
           "OTHER"
         ]
       },
-      "id": "lock",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "lock"
     },
     {
       "platforms": [
@@ -123,19 +111,7 @@
           "zoneActivity": true
         }
       },
-      "id": "presence",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "presence"
     },
     {
       "name": {
@@ -202,19 +178,7 @@
           }
         }
       ],
-      "id": "smoke-detector",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "smoke-detector"
     },
     {
       "platforms": [
@@ -262,19 +226,7 @@
           "units": "%"
         }
       },
-      "id": "tv",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "tv"
     },
     {
       "platforms": [
@@ -312,19 +264,7 @@
         "measure_power",
         "onoff"
       ],
-      "id": "wall-plug",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "wall-plug"
     },
     {
       "name": {
@@ -391,19 +331,7 @@
           }
         }
       ],
-      "id": "washing-machine",
-      "settings": [
-        {
-          "id": "password",
-          "type": "password",
-          "label": {
-            "en": "Personal Access Token"
-          },
-          "hint": {
-            "en": "The personal access token generated in the SmartThings token portal."
-          }
-        }
-      ]
+      "id": "washing-machine"
     }
   ],
   "capabilities": {

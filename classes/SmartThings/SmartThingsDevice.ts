@@ -14,7 +14,7 @@ class SmartThingsDevice extends Homey.Device {
   timer: NodeJS.Timeout | undefined;
 
   private get client() {
-    const token = this.homey.settings.get("token") as string;
+    const token = this.homey.settings.get("personalAccessToken") as string;
     if (!token) throw new Error("No personal access token present");
     return new SmartThingsClient(new BearerTokenAuthenticator(token), {
       logger: new STLogger(),
