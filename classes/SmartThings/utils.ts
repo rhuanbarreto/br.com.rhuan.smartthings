@@ -1,4 +1,5 @@
 import { Component, Device } from "@smartthings/core-sdk";
+import isTruthy from "../../utils/isTruthy";
 import capabilities from "./capabilities";
 
 export function getHomeyCapability(smartThingsCapability: string) {
@@ -36,5 +37,5 @@ export function getHomeyCapabilitiesForDevice(device: Device) {
     ?.map(getComponentCapabilities)
     .flat()
     .map(getHomeyCapability)
-    .filter(Boolean);
+    .filter(isTruthy);
 }
