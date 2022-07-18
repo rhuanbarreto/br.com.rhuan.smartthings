@@ -5,7 +5,10 @@ import {
 import Homey, { Device } from "homey";
 import PairSession from "homey/lib/PairSession";
 import STLogger from "./Logger";
-import { getHomeyCapabilitiesForDevice } from "./utils";
+import {
+  getHomeyCapabilitiesForDevice,
+  getHomeyCapabilitiesOptionsForDevice,
+} from "./utils";
 
 class SmartThingsDriver extends Homey.Driver {
   capability: string = "";
@@ -29,10 +32,13 @@ class SmartThingsDriver extends Homey.Driver {
       });
       const devices = myDevices?.map((device) => {
         const capabilities = getHomeyCapabilitiesForDevice(device);
+        const capabilitiesOptions =
+          getHomeyCapabilitiesOptionsForDevice(device);
         return {
           name: device.label ?? device.name,
           data: { id: device.deviceId },
           capabilities,
+          capabilitiesOptions,
         };
       });
 
