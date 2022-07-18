@@ -10,6 +10,7 @@ type CapabilityList = Record<
     command?: (
       value: number | string | object
     ) => string | { command: string; arguments: (string | number | object)[] };
+    options?: {};
   }[]
 >;
 
@@ -30,9 +31,25 @@ const deprecatedCapabilities: CapabilityList = {
  * Reference in https://developer-preview.smartthings.com/docs/devices/capabilities/capabilities-reference/
  */
 const productionCapabilities: CapabilityList = {
-  accelerationSensor: [], // TODO
-  airQualitySensor: [], // TODO
-  alarm: [], // TODO
+  accelerationSensor: [
+    {
+      homeyCapability: "alarm_motion",
+      converter: (v) => v.acceleration.value === "active",
+    },
+  ],
+  airQualitySensor: [
+    {
+      homeyCapability: "measure_co2.air_quality",
+      converter: (v) => v.airQuality.value as number,
+      options: {
+        decimals: 0,
+        min: 0,
+        max: 100,
+        units: "CAQI",
+      },
+    },
+  ],
+  alarm: [], // TODO - ENUM > 2
   audioMute: [
     {
       command: (v) => (v ? "mute" : "unmute"),
@@ -41,21 +58,35 @@ const productionCapabilities: CapabilityList = {
     },
   ],
   audioNotification: [], // TODO
-  audioStream: [], // TODO
+  audioStream: [
+    {
+      homeyCapability: "speaker_track.url",
+      converter: (v) => v.uri.value as string,
+    },
+  ],
   audioVolume: [
     {
-      command: (v) => ({
-        command: "setVolume",
-        arguments: [v],
-      }),
+      command: (v) => ({ command: "setVolume", arguments: [v] }),
       converter: (v) => v.volume.value as number,
       homeyCapability: "volume_set",
+      options: {
+        decimals: 0,
+        min: 0,
+        max: 100,
+        step: 1,
+        units: "%",
+      },
     },
   ],
   battery: [
     {
       converter: (v) => v.battery.value as number,
       homeyCapability: "measure_battery",
+      options: {
+        min: 0,
+        max: 100,
+        units: "%",
+      },
     },
   ],
   button: [], // TODO
@@ -124,7 +155,12 @@ const productionCapabilities: CapabilityList = {
   refresh: [
     {
       command: () => "refresh",
-      homeyCapability: null,
+      homeyCapability: "button.refresh",
+      options: {
+        maintenanceAction: true,
+        title: { en: "Refresh Device" },
+        desc: { en: "Send a device refresh command" },
+      },
     },
   ],
   refrigeration: [], // TODO
@@ -220,13 +256,18 @@ const proposedCapabilities: CapabilityList = {
   ],
   powerConsumptionReport: [
     {
-      converter: (v) =>
-        (
-          v.powerConsumption.value as {
-            power: number;
-          }
-        ).power,
+      converter: (v) => (v.powerConsumption.value as { power: number }).power,
       homeyCapability: "measure_power",
+    },
+  ],
+  tvChannel: [
+    {
+      converter: (v) => v.tvChannel.value as string,
+      homeyCapability: "speaker_album",
+    },
+    {
+      converter: (v) => v.tvChannelName.value as string,
+      homeyCapability: "speaker_track",
     },
   ],
   washerOperatingState: [
