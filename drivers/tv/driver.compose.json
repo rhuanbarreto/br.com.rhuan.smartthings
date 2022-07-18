@@ -9,14 +9,6 @@
     "volume_mute",
     "media_input_source"
   ],
-  "capabilitiesOptions": {
-    "volume_set": {
-      "decimals": 0,
-      "min": 0,
-      "max": 100,
-      "units": "%"
-    }
-  },
   "$extends": [
     "defaults"
   ]
