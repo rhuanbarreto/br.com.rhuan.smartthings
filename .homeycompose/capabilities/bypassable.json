@@ -1,0 +1,28 @@
+{
+  "type": "enum",
+  "values": [
+    {
+      "id": "ready",
+      "title": {
+        "en": "Ready"
+      }
+    },
+    {
+      "id": "notReady",
+      "title": {
+        "en": "Not Ready"
+      }
+    },
+    {
+      "id": "bypassed",
+      "title": {
+        "en": "Bypassed"
+      }
+    }
+  ],
+  "title": {
+    "en": "Bypass State"
+  },
+  "getable": true,
+  "uiComponent": "sensor"
+}

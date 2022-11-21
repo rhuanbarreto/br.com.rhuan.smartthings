@@ -38,7 +38,15 @@ export const productionCapabilities: CapabilityList = {
       homeyCapability: "volume_mute",
     },
   ],
-  audioNotification: [], // TODO
+  audioNotification: [
+    {
+      command: (v) => ({
+        command: "playTrack",
+        arguments: [v, 50],
+      }),
+      homeyCapability: null,
+    },
+  ],
   audioStream: [
     {
       homeyCapability: "speaker_track.url",
@@ -71,23 +79,114 @@ export const productionCapabilities: CapabilityList = {
     },
   ],
   button: [], // TODO
-  bypassable: [], // TODO
-  carbonDioxideMeasurement: [], // TODO
-  carbonMonoxideMeasurement: [], // TODO
-  colorControl: [], // TODO
-  colorTemperature: [], // TODO
+  bypassable: [
+    {
+      converter: (v) => v.bypassStatus.value as string,
+      homeyCapability: "bypassable",
+    },
+  ],
+  carbonDioxideMeasurement: [
+    {
+      converter: (v) => v.carbonDioxide.value as number,
+      homeyCapability: "measure_co2",
+      options: {
+        min: 0,
+        max: 1000000,
+        units: "ppm",
+      },
+    },
+  ],
+  carbonMonoxideDetector: [
+    {
+      homeyCapability: "alarm_co",
+      converter: (v) => v.carbonMonoxide.value !== "clear",
+    },
+  ],
+  carbonMonoxideMeasurement: [
+    {
+      converter: (v) => v.carbonMonoxideLevel.value as number,
+      homeyCapability: "measure_co",
+      options: {
+        min: 0,
+        max: 1000000,
+        units: "ppm",
+      },
+    },
+  ],
+  colorControl: [
+    {
+      homeyCapability: "light_hue",
+      converter: (v) => v.hue.value as number,
+      command: (v) => ({
+        command: "setHue",
+        arguments: [v],
+      }),
+    },
+    {
+      homeyCapability: "light_saturation",
+      converter: (v) => v.saturation.value as number,
+      command: (v) => ({
+        command: "setSaturation",
+        arguments: [v],
+      }),
+    },
+  ],
+  colorTemperature: [
+    {
+      converter: (v) => v.colorTemperature.value as number,
+      homeyCapability: "light_temperature",
+      options: {
+        min: 1,
+        max: 30000,
+        units: "K",
+      },
+      command: (v) => ({
+        command: "setColorTemperature",
+        arguments: [v],
+      }),
+    },
+  ],
   configuration: [
     {
       command: () => "configure",
       homeyCapability: null,
     },
   ],
-  contactSensor: [], // TODO
-  dewPoint: [], // TODO
+  contactSensor: [
+    {
+      homeyCapability: "alarm_contact",
+      converter: (v) => v.contact.value === "open",
+    },
+  ],
+  dewPoint: [
+    {
+      homeyCapability: "measure_temperature",
+      converter: (v) => v.dewpoint.value as number,
+      options: {
+        min: -460,
+        max: 10000,
+      },
+    },
+  ],
   doorControl: [], // TODO
   dustSensor: [], // TODO
-  energyMeter: [], // TODO
-  equivalentCarbonDioxideMeasurement: [], // TODO
+  energyMeter: [
+    {
+      homeyCapability: "meter_power",
+      converter: (v) => v.energy.value as number,
+    },
+  ],
+  equivalentCarbonDioxideMeasurement: [
+    {
+      converter: (v) => v.equivalentCarbonDioxideMeasurement.value as number,
+      homeyCapability: "measure_co2",
+      options: {
+        min: 0,
+        max: 1000000,
+        units: "ppm",
+      },
+    },
+  ],
   execute: [], // TODO
   fanOscillationMode: [], // TODO
   fanSpeed: [], // TODO
@@ -101,7 +200,12 @@ export const productionCapabilities: CapabilityList = {
       homeyCapability: null,
     },
   ],
-  illuminanceMeasurement: [], // TODO
+  illuminanceMeasurement: [
+    {
+      homeyCapability: "measure_luminance",
+      converter: (v) => v.illuminance.value as number,
+    },
+  ],
   imageCapture: [], // TODO
   infraredLevel: [], // TODO
   locationMode: [], // TODO

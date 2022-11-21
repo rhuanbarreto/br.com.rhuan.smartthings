@@ -49,10 +49,8 @@ export function getHomeyCapabilitiesForDevice(device: Device) {
   const getComponentCapabilities = (component: Component) =>
     component.capabilities.map((c) => c.id);
   return device.components
-    ?.map(getComponentCapabilities)
-    .flat()
-    .map(getHomeyCapability)
-    .flat()
+    ?.flatMap(getComponentCapabilities)
+    .flatMap(getHomeyCapability)
     .filter(isTruthy);
 }
 
@@ -60,10 +58,8 @@ export function getHomeyCapabilitiesOptionsForDevice(device: Device) {
   const getComponentCapabilities = (component: Component) =>
     component.capabilities.map((c) => c.id);
   return device.components
-    ?.map(getComponentCapabilities)
-    .flat()
-    .map(getHomeyCapabilityOptions)
-    .flat()
+    ?.flatMap(getComponentCapabilities)
+    .flatMap(getHomeyCapabilityOptions)
     .filter(isTruthy)
     .reduce((prev, curr) => ({ ...prev, ...curr }), {});
 }
