@@ -218,14 +218,6 @@
         "volume_mute",
         "media_input_source"
       ],
-      "capabilitiesOptions": {
-        "volume_set": {
-          "decimals": 0,
-          "min": 0,
-          "max": 100,
-          "units": "%"
-        }
-      },
       "id": "tv"
     },
     {
@@ -335,6 +327,42 @@
     }
   ],
   "capabilities": {
+    "alarm": {
+      "type": "enum",
+      "values": [
+        {
+          "id": "both",
+          "title": {
+            "en": "Both"
+          }
+        },
+        {
+          "id": "off",
+          "title": {
+            "en": "Off"
+          }
+        },
+        {
+          "id": "siren",
+          "title": {
+            "en": "Siren"
+          }
+        },
+        {
+          "id": "strobe",
+          "title": {
+            "en": "Strobe"
+          }
+        }
+      ],
+      "title": {
+        "en": "Alarm"
+      },
+      "getable": true,
+      "setable": true,
+      "uiComponent": "sensor",
+      "icon": "/assets/custom-capability-icons/alarm.svg"
+    },
     "media_input_source": {
       "type": "enum",
       "values": [
@@ -481,7 +509,8 @@
       },
       "getable": true,
       "setable": true,
-      "uiComponent": "picker"
+      "uiComponent": "sensor",
+      "icon": "/assets/custom-capability-icons/washer_operating_state.svg"
     }
   }
 }

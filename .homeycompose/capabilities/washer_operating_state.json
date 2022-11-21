@@ -25,5 +25,6 @@
   },
   "getable": true,
   "setable": true,
-  "uiComponent": "picker"
+  "uiComponent": "sensor",
+  "icon": "/assets/custom-capability-icons/washer_operating_state.svg"
 }

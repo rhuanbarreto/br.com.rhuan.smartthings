@@ -1,0 +1,36 @@
+{
+  "type": "enum",
+  "values": [
+    {
+      "id": "both",
+      "title": {
+        "en": "Both"
+      }
+    },
+    {
+      "id": "off",
+      "title": {
+        "en": "Off"
+      }
+    },
+    {
+      "id": "siren",
+      "title": {
+        "en": "Siren"
+      }
+    },
+    {
+      "id": "strobe",
+      "title": {
+        "en": "Strobe"
+      }
+    }
+  ],
+  "title": {
+    "en": "Alarm"
+  },
+  "getable": true,
+  "setable": true,
+  "uiComponent": "sensor",
+  "icon": "/assets/custom-capability-icons/alarm.svg"
+}

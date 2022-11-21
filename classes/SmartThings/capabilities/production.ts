@@ -24,7 +24,13 @@ export const productionCapabilities: CapabilityList = {
       },
     },
   ],
-  alarm: [], // TODO - ENUM > 2
+  alarm: [
+    {
+      command: (v) => String(v),
+      converter: (v) => v.alarm.value as string,
+      homeyCapability: "alarm",
+    },
+  ],
   audioMute: [
     {
       command: (v) => (v ? "mute" : "unmute"),

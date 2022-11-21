@@ -18,9 +18,11 @@ export type CapabilityList = Record<
   }[]
 >;
 
-export default {
+const finalList: CapabilityList = {
   ...deprecatedCapabilities,
   ...vendorSpecificCapabilities,
   ...proposedCapabilities,
   ...productionCapabilities,
 };
+
+export default finalList;
