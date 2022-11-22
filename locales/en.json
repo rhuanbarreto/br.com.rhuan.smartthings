@@ -2,6 +2,7 @@
   "personal_token": {
     "title": "Personal Access Token",
     "loading": "loading",
-    "invalid_credentials": "Invalid Credentials"
+    "invalid_credentials": "Invalid Credentials",
+    "description": "If you still don't have a token, generate your access token at the link below with all scopes on the 'Devices' section and 'See all locations'."
   }
 }
