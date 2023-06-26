@@ -3,7 +3,6 @@
   "extends": [
     "config:js-app",
     "group:recommended",
-    "schedule:nonOfficeHours",
     ":labels(dependencies)",
     "packages:eslint",
     "packages:react",
