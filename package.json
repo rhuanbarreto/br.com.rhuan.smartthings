@@ -17,6 +17,6 @@
   "dependencies": {
     "@smartthings/core-sdk": "5.3.0",
     "@smartthings/smartapp": "2.6.2",
-    "axios": "0.27.2"
+    "axios": "0.28.0"
   }
 }
